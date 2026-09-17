@@ -1,0 +1,103 @@
+# =========================
+# Environment variables
+# =========================
+
+.env
+.env.*
+!.env.example
+
+
+# =========================
+# Python virtual environment
+# =========================
+
+.venv/
+venv/
+env/
+ENV/
+
+
+# =========================
+# Python cache files
+# =========================
+
+__pycache__/
+*.py[cod]
+*$py.class
+
+
+# =========================
+# Python packaging files
+# =========================
+
+*.egg-info/
+dist/
+build/
+.eggs/
+
+
+# =========================
+# Jupyter Notebook files
+# =========================
+
+.ipynb_checkpoints/
+
+
+# =========================
+# Testing and coverage
+# =========================
+
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+
+
+# =========================
+# Type checkers and linters
+# =========================
+
+.mypy_cache/
+.ruff_cache/
+.pyre/
+
+
+# =========================
+# Logs
+# =========================
+
+*.log
+logs/
+
+
+# =========================
+# Local databases
+# =========================
+
+*.sqlite3
+*.db
+
+
+# =========================
+# IDE and editor files
+# =========================
+
+.vscode/
+.idea/
+
+
+# =========================
+# Operating system files
+# =========================
+
+.DS_Store
+Thumbs.db
+
+
+# =========================
+# Generated local files
+# =========================
+
+*.tmp
+*.temp
+.cache/

@@ -1,0 +1,1865 @@
+LINUX BASICS KNOWLEDGE BASE
+============================
+
+Document: Linux Basics
+Version: 1.0
+Level: Beginner
+Purpose: Knowledge source for a Linux RAG Assistant.
+
+This document teaches basic Linux commands, file management, text processing, permissions, processes, networking, storage, archives, and package management.
+
+Important:
+Commands can behave differently depending on the Linux distribution, shell, user permissions, and installed software. Examples should be tested carefully. Commands that delete files, terminate processes, modify permissions, or install packages can have important consequences.
+
+============================================================
+SECTION 1: LINUX INTRODUCTION
+============================================================
+
+Linux is an open-source operating system kernel. Linux distributions combine the kernel with system utilities, libraries, package managers, and other software.
+
+Examples of Linux distributions include Ubuntu, Debian, Fedora, Arch Linux, and Linux Mint.
+
+A terminal is an interface where users enter commands. A shell reads commands and executes programs.
+
+Common shells include Bash and Zsh. Bash is widely used on Linux systems.
+
+A command usually has this structure:
+
+command [options] [arguments]
+
+Example:
+
+ls -l /home
+
+In this example:
+- ls is the command.
+- -l is an option.
+- /home is an argument.
+
+The current working directory is the directory where a command is being executed.
+
+The home directory is the personal directory of a user. It is commonly represented by ~.
+
+The root directory is represented by /. It is the top-level directory of the Linux filesystem.
+
+The root user is the administrator account. The root directory and root user are different concepts.
+
+============================================================
+SECTION 2: NAVIGATION AND FILE MANAGEMENT
+============================================================
+
+COMMAND 1: pwd
+--------------
+
+Name:
+pwd
+
+Meaning:
+Print Working Directory.
+
+Description:
+The pwd command displays the absolute path of the current working directory.
+
+Syntax:
+pwd
+
+Example:
+pwd
+
+Example output:
+ /home/rahul/projects
+
+Common usage:
+Use pwd when you are unsure which directory you are currently inside.
+
+Important:
+The output depends on the current directory of the terminal.
+
+============================================================
+
+COMMAND 2: ls
+--------------
+
+Name:
+ls
+
+Meaning:
+List.
+
+Description:
+The ls command displays files and directories in a location.
+
+Syntax:
+ls [options] [path]
+
+Basic example:
+ls
+
+List files in a specific directory:
+ls /home
+
+Common options:
+ls -l
+Displays detailed information.
+
+ls -a
+Shows hidden files and directories.
+
+ls -h
+Displays human-readable file sizes when used with a suitable listing option.
+
+ls -la
+Shows hidden files with detailed information.
+
+Example:
+ls -lah /var/log
+
+Important:
+Hidden files usually begin with a dot, such as .bashrc.
+
+============================================================
+
+COMMAND 3: cd
+--------------
+
+Name:
+cd
+
+Meaning:
+Change Directory.
+
+Description:
+The cd command changes the current working directory.
+
+Syntax:
+cd [directory]
+
+Examples:
+cd /home
+cd /tmp
+cd ~
+
+Go to the parent directory:
+cd ..
+
+Go to the previous directory:
+cd -
+
+Go to the home directory:
+cd
+
+Important concepts:
+- / is the root directory.
+- ~ represents the current user's home directory.
+- .. represents the parent directory.
+- . represents the current directory.
+
+Example workflow:
+pwd
+cd /tmp
+pwd
+cd ..
+pwd
+
+============================================================
+
+COMMAND 4: mkdir
+-----------------
+
+Name:
+mkdir
+
+Meaning:
+Make Directory.
+
+Description:
+The mkdir command creates one or more directories.
+
+Syntax:
+mkdir [options] directory_name
+
+Example:
+mkdir projects
+
+Create multiple directories:
+mkdir frontend backend docs
+
+Create nested directories:
+mkdir -p project/src/components
+
+The -p option creates parent directories if they do not exist.
+
+Example:
+mkdir -p linux-rag/data/raw
+
+Important:
+mkdir normally reports an error if the target directory already exists, unless appropriate options are used.
+
+============================================================
+
+COMMAND 5: rmdir
+-----------------
+
+Name:
+rmdir
+
+Meaning:
+Remove Directory.
+
+Description:
+The rmdir command removes empty directories.
+
+Syntax:
+rmdir directory_name
+
+Example:
+rmdir old_folder
+
+Remove nested empty directories:
+rmdir -p parent/child
+
+Important:
+rmdir only removes empty directories. It does not remove directories containing files.
+
+To remove a directory containing files, other commands such as rm may be used, but they must be used carefully.
+
+============================================================
+
+COMMAND 6: touch
+-----------------
+
+Name:
+touch
+
+Description:
+The touch command creates an empty file if the file does not exist. If the file exists, it can update its timestamps.
+
+Syntax:
+touch filename
+
+Examples:
+touch notes.txt
+touch app.py
+touch file1.txt file2.txt
+
+Create a file inside a directory:
+touch project/README.md
+
+Important:
+touch does not open the file or add content to it.
+
+Example:
+touch hello.txt
+ls -l hello.txt
+
+============================================================
+
+COMMAND 7: cp
+---------------
+
+Name:
+cp
+
+Meaning:
+Copy.
+
+Description:
+The cp command copies files or directories.
+
+Syntax:
+cp [options] source destination
+
+Copy a file:
+cp notes.txt backup.txt
+
+Copy a file into a directory:
+cp notes.txt /tmp/
+
+Copy a directory recursively:
+cp -r project project_backup
+
+Common options:
+cp -r
+Copies directories and their contents.
+
+cp -i
+Asks before overwriting files in supported situations.
+
+cp -v
+Shows the operations being performed.
+
+Example:
+cp -rv src backup_src
+
+Important:
+When copying directories, recursive copying is generally required.
+
+============================================================
+
+COMMAND 8: mv
+---------------
+
+Name:
+mv
+
+Meaning:
+Move.
+
+Description:
+The mv command moves files and directories. It is also used to rename them.
+
+Syntax:
+mv [options] source destination
+
+Rename a file:
+mv old.txt new.txt
+
+Move a file:
+mv notes.txt documents/
+
+Move and rename:
+mv app.py project/main.py
+
+Common options:
+mv -i
+Asks before overwriting files in supported situations.
+
+mv -v
+Displays the operations being performed.
+
+Important:
+The effect of mv depends on the source and destination paths.
+
+============================================================
+
+COMMAND 9: rm
+---------------
+
+Name:
+rm
+
+Meaning:
+Remove.
+
+Description:
+The rm command removes files and can remove directories with suitable options.
+
+Syntax:
+rm [options] file
+
+Remove a file:
+rm notes.txt
+
+Remove multiple files:
+rm file1.txt file2.txt
+
+Remove a directory and its contents:
+rm -r old_project
+
+Common options:
+rm -r
+Recursively removes directories and their contents.
+
+rm -i
+Prompts before removal in supported situations.
+
+rm -f
+Forces removal in supported situations.
+
+Important:
+rm normally does not provide a recycle bin. Deleted data may not be easily recoverable.
+
+Be extremely careful with recursive removal and paths such as / or /*.
+
+============================================================
+
+COMMAND 10: find
+-----------------
+
+Name:
+find
+
+Description:
+The find command searches for files and directories in a directory hierarchy.
+
+Syntax:
+find [starting_path] [conditions] [actions]
+
+Find all files in the current directory:
+find .
+
+Find a file by name:
+find . -name "notes.txt"
+
+Find Python files:
+find . -name "*.py"
+
+Find directories:
+find . -type d
+
+Find regular files:
+find . -type f
+
+Find files under /tmp:
+find /tmp -type f
+
+Find files by name, case-insensitively:
+find . -iname "readme.md"
+
+Common conditions:
+-name
+Matches a name pattern.
+
+-type f
+Matches regular files.
+
+-type d
+Matches directories.
+
+Important:
+find searches recursively by default from the starting path.
+
+============================================================
+SECTION 3: READING AND MANAGING FILE CONTENT
+============================================================
+
+COMMAND 11: cat
+----------------
+
+Name:
+cat
+
+Meaning:
+Concatenate.
+
+Description:
+The cat command displays file contents and can concatenate multiple files.
+
+Syntax:
+cat [options] [file]
+
+Display a file:
+cat notes.txt
+
+Display multiple files:
+cat file1.txt file2.txt
+
+Combine files into a new file:
+cat file1.txt file2.txt > combined.txt
+
+Append a file:
+cat file3.txt >> combined.txt
+
+Common options:
+cat -n
+Shows line numbers.
+
+Important:
+cat is useful for short files. For very large files, less or other tools may be more suitable.
+
+============================================================
+
+COMMAND 12: less
+-----------------
+
+Name:
+less
+
+Description:
+The less command displays text one screen at a time and allows navigation through long files.
+
+Syntax:
+less filename
+
+Example:
+less /var/log/syslog
+
+Useful keys:
+Space
+Move forward one page.
+
+b
+Move backward one page.
+
+q
+Quit.
+
+/
+Search for text.
+
+n
+Go to the next search result.
+
+Important:
+less is useful for reading large text files without printing the entire file at once.
+
+============================================================
+
+COMMAND 13: head
+-----------------
+
+Name:
+head
+
+Description:
+The head command displays the beginning of a file or input.
+
+Syntax:
+head [options] [file]
+
+Display the first 10 lines:
+head file.txt
+
+Display the first 5 lines:
+head -n 5 file.txt
+
+Display the first 20 lines:
+head -n 20 file.txt
+
+Example:
+head -n 10 /var/log/syslog
+
+Important:
+The default number of lines is commonly 10, but options can change the output.
+
+============================================================
+
+COMMAND 14: tail
+-----------------
+
+Name:
+tail
+
+Description:
+The tail command displays the end of a file or input.
+
+Syntax:
+tail [options] [file]
+
+Display the last 10 lines:
+tail file.txt
+
+Display the last 20 lines:
+tail -n 20 file.txt
+
+Follow a growing log file:
+tail -f app.log
+
+Stop following:
+Press Ctrl+C.
+
+Example:
+tail -f /var/log/syslog
+
+Important:
+tail -f is useful for monitoring logs while an application is running.
+
+============================================================
+
+COMMAND 15: grep
+-----------------
+
+Name:
+grep
+
+Meaning:
+Global Regular Expression Print.
+
+Description:
+The grep command searches for lines matching a pattern in text.
+
+Syntax:
+grep [options] pattern [file]
+
+Search for a word:
+grep "error" app.log
+
+Case-insensitive search:
+grep -i "error" app.log
+
+Show line numbers:
+grep -n "error" app.log
+
+Search recursively:
+grep -r "TODO" project/
+
+Invert the match:
+grep -v "success" app.log
+
+Count matching lines:
+grep -c "error" app.log
+
+Common options:
+-i
+Ignore case.
+
+-n
+Show line numbers.
+
+-r
+Search recursively.
+
+-v
+Show lines that do not match.
+
+-c
+Count matching lines.
+
+Example:
+grep -n -i "failed" /var/log/auth.log
+
+Important:
+grep works with patterns. Regular expressions can be used for more advanced searches.
+
+============================================================
+
+COMMAND 16: sort
+-----------------
+
+Name:
+sort
+
+Description:
+The sort command sorts lines of text.
+
+Syntax:
+sort [options] [file]
+
+Sort lines alphabetically:
+sort names.txt
+
+Sort in reverse order:
+sort -r names.txt
+
+Sort numerically:
+sort -n numbers.txt
+
+Sort and remove duplicate adjacent lines:
+sort names.txt | uniq
+
+Common options:
+-r
+Reverse the sorting order.
+
+-n
+Sort numerically.
+
+-f
+Ignore case in supported sorting behavior.
+
+Example:
+sort -n scores.txt
+
+Important:
+sort normally processes lines as text. Numeric sorting uses -n.
+
+============================================================
+
+COMMAND 17: uniq
+-----------------
+
+Name:
+uniq
+
+Description:
+The uniq command removes or reports repeated adjacent lines.
+
+Syntax:
+uniq [options] [file]
+
+Remove adjacent duplicate lines:
+uniq names.txt
+
+Count repeated adjacent lines:
+uniq -c names.txt
+
+Show only duplicated adjacent lines:
+uniq -d names.txt
+
+Common usage:
+sort names.txt | uniq
+
+Important:
+uniq compares adjacent lines. To remove duplicates throughout an unsorted file, sorting first is often necessary.
+
+============================================================
+
+COMMAND 18: wc
+----------------
+
+Name:
+wc
+
+Meaning:
+Word Count.
+
+Description:
+The wc command counts lines, words, bytes, or characters in input.
+
+Syntax:
+wc [options] [file]
+
+Count lines:
+wc -l file.txt
+
+Count words:
+wc -w file.txt
+
+Count bytes:
+wc -c file.txt
+
+Count characters:
+wc -m file.txt
+
+Example:
+wc -l linux_basics.txt
+
+Important:
+The output depends on the selected option and the input encoding.
+
+============================================================
+
+COMMAND 19: cut
+-----------------
+
+Name:
+cut
+
+Description:
+The cut command extracts selected sections from each line of text.
+
+Syntax:
+cut [options] [file]
+
+Extract the first field separated by a colon:
+cut -d ':' -f 1 /etc/passwd
+
+Extract characters:
+cut -c 1-5 file.txt
+
+Extract a comma-separated field:
+cut -d ',' -f 2 data.csv
+
+Common options:
+-d
+Specify the delimiter.
+
+-f
+Select fields.
+
+-c
+Select characters.
+
+Important:
+cut is useful for simple structured text. More complex transformations may require awk or other tools.
+
+============================================================
+
+COMMAND 20: tr
+----------------
+
+Name:
+tr
+
+Meaning:
+Translate or Delete Characters.
+
+Description:
+The tr command translates, replaces, or deletes characters from standard input.
+
+Syntax:
+tr [options] SET1 [SET2]
+
+Convert lowercase to uppercase:
+echo "hello" | tr 'a-z' 'A-Z'
+
+Replace spaces with underscores:
+echo "hello world" | tr ' ' '_'
+
+Delete digits:
+echo "abc123" | tr -d '0-9'
+
+Delete newline characters in a simple input:
+tr -d '\n' < file.txt
+
+Common options:
+-d
+Delete characters.
+
+-s
+Squeeze repeated characters.
+
+Important:
+tr normally reads from standard input and writes to standard output.
+
+============================================================
+SECTION 4: REDIRECTION AND PIPES
+============================================================
+
+COMMAND 21: echo
+-----------------
+
+Name:
+echo
+
+Description:
+The echo command prints text or variable values to standard output.
+
+Syntax:
+echo [options] [text]
+
+Example:
+echo "Hello Linux"
+
+Print a variable:
+echo "$HOME"
+
+Write text to a file:
+echo "Linux is useful" > notes.txt
+
+Append text:
+echo "Another line" >> notes.txt
+
+Important:
+Shell expansion and quoting affect how echo processes its arguments.
+
+============================================================
+
+COMMAND 22: printf
+-------------------
+
+Name:
+printf
+
+Description:
+The printf command formats and prints text. It is commonly used in shell scripts.
+
+Syntax:
+printf FORMAT [ARGUMENTS]
+
+Example:
+printf "Hello %s\n" "Linux"
+
+Print a number:
+printf "Number: %d\n" 10
+
+Print multiple values:
+printf "%s - %s\n" "Name" "Rahul"
+
+Important:
+printf is often more predictable than echo for formatted output.
+
+============================================================
+
+COMMAND 23: tee
+-----------------
+
+Name:
+tee
+
+Description:
+The tee command reads standard input and writes it both to standard output and to one or more files.
+
+Syntax:
+tee [options] [file]
+
+Example:
+echo "Hello" | tee output.txt
+
+Append instead of overwrite:
+echo "Another line" | tee -a output.txt
+
+Example:
+ls -l | tee listing.txt
+
+Important:
+tee is useful when you want to see command output and save it simultaneously.
+
+============================================================
+
+COMMAND 24: xargs
+------------------
+
+Name:
+xargs
+
+Description:
+The xargs command builds and executes commands using items read from standard input.
+
+Syntax:
+xargs [options] [command]
+
+Example:
+echo "file1.txt file2.txt" | xargs ls
+
+Find files and process them:
+find . -name "*.txt" -print0 | xargs -0 wc -l
+
+Important:
+xargs can be dangerous when used with commands that delete or modify files. Quoting, delimiters, and filenames containing spaces require care.
+
+============================================================
+
+COMMAND 25: diff
+-----------------
+
+Name:
+diff
+
+Description:
+The diff command compares files line by line.
+
+Syntax:
+diff [options] file1 file2
+
+Example:
+diff old.txt new.txt
+
+Unified output:
+diff -u old.txt new.txt
+
+Important:
+diff is useful for comparing configuration files, source code, and text documents.
+
+============================================================
+SECTION 5: FILE PERMISSIONS AND USERS
+============================================================
+
+COMMAND 26: chmod
+------------------
+
+Name:
+chmod
+
+Meaning:
+Change Mode.
+
+Description:
+The chmod command changes file and directory permissions.
+
+Syntax:
+chmod [options] mode file
+
+Symbolic permission example:
+chmod u+x script.sh
+
+This adds execute permission for the owner.
+
+Numeric permission example:
+chmod 755 script.sh
+
+Meaning of 755:
+- Owner: read, write, execute.
+- Group: read, execute.
+- Others: read, execute.
+
+Common symbolic forms:
+u
+User or owner.
+
+g
+Group.
+
+o
+Others.
+
+a
+All categories.
+
+r
+Read permission.
+
+w
+Write permission.
+
+x
+Execute permission.
+
+Examples:
+chmod u+x script.sh
+chmod g-w file.txt
+chmod o+r document.txt
+
+Important:
+Changing permissions affects who can read, write, or execute a file. Be careful with permissions on sensitive files and directories.
+
+============================================================
+
+COMMAND 27: chown
+------------------
+
+Name:
+chown
+
+Meaning:
+Change Owner.
+
+Description:
+The chown command changes the owner of files and directories.
+
+Syntax:
+chown [options] owner[:group] file
+
+Example:
+sudo chown rahul file.txt
+
+Change owner and group:
+sudo chown rahul:developers project/
+
+Recursive ownership change:
+sudo chown -R rahul:developers project/
+
+Important:
+Changing ownership often requires administrator privileges. Recursive changes can affect many files.
+
+============================================================
+
+COMMAND 28: chgrp
+------------------
+
+Name:
+chgrp
+
+Meaning:
+Change Group.
+
+Description:
+The chgrp command changes the group ownership of files and directories.
+
+Syntax:
+chgrp [options] group file
+
+Example:
+chgrp developers project.txt
+
+Recursive example:
+chgrp -R developers project/
+
+Important:
+The user must have appropriate permissions to change group ownership.
+
+============================================================
+
+COMMAND 29: whoami
+-------------------
+
+Name:
+whoami
+
+Description:
+The whoami command prints the effective username of the current user.
+
+Syntax:
+whoami
+
+Example:
+whoami
+
+Example output:
+rahul
+
+Important:
+whoami is useful for checking which user is executing a command, especially when using sudo or different accounts.
+
+============================================================
+
+COMMAND 30: id
+----------------
+
+Name:
+id
+
+Description:
+The id command displays user identity information, including user ID and group IDs.
+
+Syntax:
+id [options] [username]
+
+Show current user's identity:
+id
+
+Show a specific user:
+id rahul
+
+Important:
+User IDs and group IDs help Linux control access to files and resources.
+
+============================================================
+SECTION 6: PROCESSES AND SYSTEM INFORMATION
+============================================================
+
+COMMAND 31: ps
+----------------
+
+Name:
+ps
+
+Meaning:
+Process Status.
+
+Description:
+The ps command displays information about running processes.
+
+Syntax:
+ps [options]
+
+Show processes associated with the current shell:
+ps
+
+Show all processes in a common format:
+ps aux
+
+Show a process tree in supported environments:
+ps -ef
+
+Important:
+Options can vary between Unix-style and BSD-style syntax.
+
+Useful fields:
+PID
+Process ID.
+
+USER
+Owner of the process.
+
+%CPU
+CPU usage.
+
+%MEM
+Memory usage.
+
+COMMAND
+Command associated with the process.
+
+============================================================
+
+COMMAND 32: top
+-----------------
+
+Name:
+top
+
+Description:
+The top command provides a live view of running processes and system resource usage.
+
+Syntax:
+top
+
+Common information:
+- CPU usage.
+- Memory usage.
+- Load average.
+- Running processes.
+- Process IDs.
+
+Useful key:
+q
+Quit.
+
+Important:
+top is interactive and updates periodically. It is useful for identifying processes consuming resources.
+
+============================================================
+
+COMMAND 33: kill
+------------------
+
+Name:
+kill
+
+Description:
+The kill command sends a signal to a process.
+
+Syntax:
+kill [signal] PID
+
+Send the default termination signal:
+kill 1234
+
+Send SIGTERM:
+kill -TERM 1234
+
+Send SIGKILL:
+kill -KILL 1234
+
+Important:
+The command name is kill, but it sends signals. SIGTERM requests termination and allows a process to clean up. SIGKILL forces termination and cannot be caught by the target process.
+
+Use process IDs carefully.
+
+============================================================
+
+COMMAND 34: jobs
+-----------------
+
+Name:
+jobs
+
+Description:
+The jobs command displays jobs started by the current shell.
+
+Syntax:
+jobs
+
+Example workflow:
+sleep 100 &
+jobs
+
+Bring a job to the foreground:
+fg %1
+
+Continue a stopped job in the background:
+bg %1
+
+Important:
+jobs is a shell builtin in common shells such as Bash.
+
+============================================================
+
+COMMAND 35: free
+-----------------
+
+Name:
+free
+
+Description:
+The free command displays information about physical memory and swap.
+
+Syntax:
+free [options]
+
+Display memory:
+free
+
+Human-readable output:
+free -h
+
+Important:
+Linux uses available memory for caching. The free command reports multiple memory values, including used, free, buffers, cache, and available memory.
+
+============================================================
+
+COMMAND 36: uname
+------------------
+
+Name:
+uname
+
+Description:
+The uname command prints system information.
+
+Syntax:
+uname [options]
+
+Display kernel name:
+uname -s
+
+Display kernel release:
+uname -r
+
+Display all available information in a common form:
+uname -a
+
+Important:
+uname reports kernel and system information. It does not necessarily provide every detail about the Linux distribution.
+
+============================================================
+
+COMMAND 37: uptime
+-------------------
+
+Name:
+uptime
+
+Description:
+The uptime command displays how long the system has been running, the number of users, and load averages.
+
+Syntax:
+uptime
+
+Example:
+uptime
+
+Important:
+Load average is not the same as CPU percentage. Its interpretation depends on the number of CPU cores and the workload.
+
+============================================================
+SECTION 7: DISK AND STORAGE
+============================================================
+
+COMMAND 38: df
+----------------
+
+Name:
+df
+
+Meaning:
+Disk Free.
+
+Description:
+The df command reports filesystem disk space usage.
+
+Syntax:
+df [options] [path]
+
+Display filesystem usage:
+df
+
+Human-readable output:
+df -h
+
+Check a specific path:
+df -h /home
+
+Important:
+df reports filesystem-level space usage. It is useful for checking whether a filesystem is running out of space.
+
+============================================================
+
+COMMAND 39: du
+----------------
+
+Name:
+du
+
+Meaning:
+Disk Usage.
+
+Description:
+The du command estimates file and directory space usage.
+
+Syntax:
+du [options] [path]
+
+Display usage of the current directory:
+du
+
+Human-readable directory usage:
+du -h
+
+Summarize a directory:
+du -sh project/
+
+Show immediate subdirectory sizes:
+du -h --max-depth=1
+
+Important:
+du and df measure disk usage at different levels. du examines files and directories, while df examines filesystem usage.
+
+============================================================
+
+COMMAND 40: lsblk
+------------------
+
+Name:
+lsblk
+
+Meaning:
+List Block Devices.
+
+Description:
+The lsblk command displays information about block devices such as disks and partitions.
+
+Syntax:
+lsblk [options]
+
+Example:
+lsblk
+
+Display filesystem information:
+lsblk -f
+
+Important:
+lsblk is useful when inspecting disks, partitions, and mounted storage devices.
+
+============================================================
+
+COMMAND 41: mount
+------------------
+
+Name:
+mount
+
+Description:
+The mount command attaches a filesystem to a directory in the filesystem tree.
+
+Syntax:
+mount [options] device directory
+
+Display mounted filesystems:
+mount
+
+Important:
+Mounting filesystems often requires administrator privileges. Incorrect mounting or unmounting can affect access to data.
+
+============================================================
+SECTION 8: NETWORKING
+============================================================
+
+COMMAND 42: ip
+----------------
+
+Name:
+ip
+
+Description:
+The ip command displays and manages network interfaces, addresses, routes, and other networking information.
+
+Syntax:
+ip OBJECT COMMAND
+
+Show network interfaces:
+ip addr
+
+Show network links:
+ip link
+
+Show routing table:
+ip route
+
+Show interface information:
+ip addr show
+
+Important:
+The ip command is commonly used instead of older networking commands such as ifconfig.
+
+Commands that modify network configuration may require administrator privileges.
+
+============================================================
+
+COMMAND 43: ping
+-----------------
+
+Name:
+ping
+
+Description:
+The ping command sends network packets to test reachability and measure response time.
+
+Syntax:
+ping [options] destination
+
+Example:
+ping example.com
+
+Send a limited number of packets:
+ping -c 4 example.com
+
+Important:
+A failed ping does not always mean a host is down. Firewalls and network policies may block ICMP packets.
+
+============================================================
+
+COMMAND 44: curl
+-----------------
+
+Name:
+curl
+
+Description:
+The curl command transfers data using supported network protocols. It is commonly used with HTTP and HTTPS.
+
+Syntax:
+curl [options] URL
+
+Fetch a webpage:
+curl https://example.com
+
+Show response headers:
+curl -I https://example.com
+
+Follow redirects:
+curl -L https://example.com
+
+Save output to a file:
+curl -o page.html https://example.com
+
+Important:
+curl is useful for testing APIs, downloading content, inspecting HTTP responses, and sending requests.
+
+============================================================
+
+COMMAND 45: wget
+------------------
+
+Name:
+wget
+
+Description:
+The wget command downloads files from supported network locations.
+
+Syntax:
+wget [options] URL
+
+Download a file:
+wget https://example.com/file.txt
+
+Save using a chosen filename:
+wget -O downloaded.txt https://example.com/file.txt
+
+Important:
+wget and curl overlap in some use cases, but their command-line options and workflows differ.
+
+============================================================
+SECTION 9: ARCHIVES AND PACKAGE MANAGEMENT
+============================================================
+
+COMMAND 46: tar
+----------------
+
+Name:
+tar
+
+Meaning:
+Tape Archive.
+
+Description:
+The tar command creates and extracts archive files. It is commonly used with gzip compression.
+
+Syntax:
+tar [options] archive files
+
+Create an archive:
+tar -cf archive.tar project/
+
+Extract an archive:
+tar -xf archive.tar
+
+Create a gzip-compressed archive:
+tar -czf project.tar.gz project/
+
+Extract a gzip-compressed archive:
+tar -xzf project.tar.gz
+
+List archive contents:
+tar -tf archive.tar
+
+Important:
+tar creates archives. Compression is often added using options such as -z for gzip.
+
+============================================================
+
+COMMAND 47: gzip
+-----------------
+
+Name:
+gzip
+
+Description:
+The gzip command compresses files using the gzip format.
+
+Syntax:
+gzip [options] file
+
+Compress a file:
+gzip notes.txt
+
+Decompress a gzip file:
+gzip -d notes.txt.gz
+
+Important:
+gzip normally replaces the original file with a compressed version unless options or workflows preserve it.
+
+============================================================
+
+COMMAND 48: apt
+----------------
+
+Name:
+apt
+
+Description:
+apt is a package management command used by Debian-based distributions such as Ubuntu and Debian.
+
+Syntax:
+apt [command] [options] [package]
+
+Update package information:
+sudo apt update
+
+Upgrade installed packages:
+sudo apt upgrade
+
+Install a package:
+sudo apt install nginx
+
+Remove a package:
+sudo apt remove nginx
+
+Search for a package:
+apt search nginx
+
+Important:
+apt commands can modify system software. Installing or removing packages may require administrator privileges.
+
+Package commands differ across distributions. Fedora commonly uses dnf, while Arch Linux commonly uses pacman.
+
+============================================================
+
+COMMAND 49: systemctl
+----------------------
+
+Name:
+systemctl
+
+Description:
+The systemctl command controls and inspects systemd services on systems that use systemd.
+
+Syntax:
+systemctl [command] [unit]
+
+Check service status:
+systemctl status nginx
+
+Start a service:
+sudo systemctl start nginx
+
+Stop a service:
+sudo systemctl stop nginx
+
+Restart a service:
+sudo systemctl restart nginx
+
+Enable a service at boot:
+sudo systemctl enable nginx
+
+Disable a service at boot:
+sudo systemctl disable nginx
+
+Important:
+Not every Linux environment uses systemd. Commands depend on the operating system and service configuration.
+
+============================================================
+SECTION 10: HELP AND DOCUMENTATION
+============================================================
+
+COMMAND 50: man
+----------------
+
+Name:
+man
+
+Meaning:
+Manual.
+
+Description:
+The man command displays manual pages for commands and system interfaces.
+
+Syntax:
+man command
+
+Example:
+man ls
+
+Read the manual for grep:
+man grep
+
+Useful keys:
+Space
+Move forward.
+
+b
+Move backward.
+
+q
+Quit.
+
+/
+Search.
+
+Important:
+Manual pages are an important source of Linux documentation. They contain command descriptions, syntax, options, and sometimes examples.
+
+============================================================
+
+COMMAND 51: history
+--------------------
+
+Name:
+history
+
+Description:
+The history command displays commands previously entered in the shell.
+
+Syntax:
+history
+
+Show recent commands:
+history
+
+Search history in Bash:
+history | grep "docker"
+
+Run a command by history number:
+!123
+
+Important:
+History behavior depends on the shell and its configuration. Commands containing passwords or secrets should not be entered carelessly.
+
+============================================================
+SECTION 11: COMMON LINUX CONCEPTS
+============================================================
+
+1. Absolute path
+
+An absolute path starts from the root directory.
+
+Example:
+/home/rahul/projects
+
+2. Relative path
+
+A relative path is interpreted from the current working directory.
+
+Example:
+projects/app.py
+
+3. Standard input
+
+Standard input is commonly represented by file descriptor 0. It is the input stream used by commands.
+
+4. Standard output
+
+Standard output is commonly represented by file descriptor 1. It is where normal command output is written.
+
+5. Standard error
+
+Standard error is commonly represented by file descriptor 2. It is used for error messages.
+
+6. Output redirection
+
+The > operator writes output to a file and normally overwrites the file.
+
+Example:
+echo "Hello" > output.txt
+
+The >> operator appends output.
+
+Example:
+echo "World" >> output.txt
+
+7. Pipe
+
+The pipe operator | sends the standard output of one command to the standard input of another.
+
+Example:
+ls | grep ".txt"
+
+8. Environment variables
+
+Environment variables store values used by processes and shells.
+
+Examples:
+HOME
+PATH
+USER
+SHELL
+
+Display a variable:
+echo "$HOME"
+
+Display environment variables:
+env
+
+9. Exit status
+
+Commands return an exit status. A common convention is 0 for success and a nonzero value for failure.
+
+Display the previous command's exit status in Bash:
+echo $?
+
+10. Wildcards
+
+The * wildcard can match multiple characters in shell pathname expansion.
+
+Example:
+ls *.txt
+
+The ? wildcard can match one character in common shell pathname expansion.
+
+Example:
+ls file?.txt
+
+============================================================
+SECTION 12: PRACTICAL COMMAND WORKFLOWS
+============================================================
+
+WORKFLOW 1: CREATE A PROJECT DIRECTORY
+
+mkdir -p linux-project/data
+cd linux-project
+touch README.md
+pwd
+ls -la
+
+Explanation:
+This workflow creates a project directory, enters it, creates a README file, and checks the current location and contents.
+
+============================================================
+
+WORKFLOW 2: FIND PYTHON FILES
+
+find . -type f -name "*.py"
+
+Explanation:
+This searches recursively from the current directory for regular files ending in .py.
+
+============================================================
+
+WORKFLOW 3: SEARCH LOGS FOR ERRORS
+
+grep -n -i "error" app.log
+
+Explanation:
+This searches app.log for error text without considering letter case and displays matching line numbers.
+
+============================================================
+
+WORKFLOW 4: COUNT LINES IN A FILE
+
+wc -l linux_basics.txt
+
+Explanation:
+This counts the number of lines in the knowledge document.
+
+============================================================
+
+WORKFLOW 5: INSPECT DISK USAGE
+
+df -h
+du -sh .
+
+Explanation:
+df -h shows filesystem space. du -sh shows the estimated space used by the current directory.
+
+============================================================
+
+WORKFLOW 6: INSPECT A RUNNING PROCESS
+
+ps aux | grep python
+
+Explanation:
+This lists processes and searches the output for python. The grep command itself may also appear in the output.
+
+============================================================
+
+WORKFLOW 7: CREATE AN ARCHIVE
+
+tar -czf project.tar.gz project/
+
+Explanation:
+This creates a gzip-compressed tar archive containing the project directory.
+
+============================================================
+
+WORKFLOW 8: CHECK NETWORK CONNECTIVITY
+
+ping -c 4 example.com
+curl -I https://example.com
+
+Explanation:
+The first command tests ICMP reachability. The second requests HTTP headers. They test different parts of network communication.
+
+============================================================
+END OF LINUX BASICS KNOWLEDGE BASE
+============================================================
